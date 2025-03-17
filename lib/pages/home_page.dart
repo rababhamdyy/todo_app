@@ -1,8 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/widgets/dialog_box.dart';
 import 'package:todo_app/widgets/todo_tile.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  void createNewTask() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogBox(controller: TextEditingController(), onSave: () {}, onCancel: () {});
+      },
+    );
+  }
+
+  List tasks = [
+    ["Task 1", false],
+    ["Task 2", true],
+    ["Task 3", false],
+    ["Task 4", true],
+    ["Task 5", false],
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +50,23 @@ class HomePage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          createNewTask();
+        },
         backgroundColor: Colors.indigo,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Icon(Icons.add, color: Colors.white),
-      ), body: TodoTile(),
+      ),
+      body: ListView.builder(
+        itemCount: tasks.length,
+        itemBuilder: (context, index) {
+          return TodoTile(
+            taskName: tasks[index][0],
+            isCompleted: tasks[index][1],
+            onChanged: (value) => {},
+          );
+        },
+      ),
     );
   }
 }
