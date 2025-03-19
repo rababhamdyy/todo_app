@@ -3,18 +3,23 @@ import 'package:todo_app/widgets/dialog_box.dart';
 import 'package:todo_app/widgets/todo_tile.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  final _controller = TextEditingController();
   void createNewTask() {
     showDialog(
       context: context,
       builder: (context) {
-        return DialogBox(controller: TextEditingController(), onSave: () {}, onCancel: () {});
+        return DialogBox(
+          controller: _controller,
+          onSave: () {},
+          onCancel: () {},
+        );
       },
     );
   }
