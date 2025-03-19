@@ -4,12 +4,14 @@ class TodoTile extends StatelessWidget {
   Function(bool?)? onChanged;
   final String taskName;
   final bool isCompleted;
+  final VoidCallback onDelete;
 
   TodoTile({
     super.key,
     required this.taskName,
     required this.isCompleted,
     required this.onChanged,
+    required this.onDelete,
   });
 
   @override
@@ -23,30 +25,29 @@ class TodoTile extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(12),
-          child: Row(
-            children: [
-              Checkbox(
-                value: isCompleted,
-                onChanged: onChanged,
-                activeColor: Colors.indigo,
-                checkColor: Colors.indigo[200],
-                side: BorderSide(color: Colors.indigo, width: 2),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(2),
-                ),
+          child: ListTile(
+            leading: Checkbox(
+              value: isCompleted,
+              onChanged: onChanged,
+              activeColor: Colors.indigo,
+              checkColor: Colors.indigo[200],
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
               ),
-              Text(
-                taskName,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  decoration:
-                      isCompleted
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none,
-                ),
+              side: BorderSide(color: Colors.indigo, width: 2),
+            ),
+            title: Text(
+              taskName,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                decoration: isCompleted ? TextDecoration.lineThrough : null,
               ),
-            ],
+            ),
+            trailing: IconButton(
+              onPressed: onDelete,
+              icon: Icon(Icons.delete, color: Colors.indigo),
+            ),
           ),
         ),
       ),

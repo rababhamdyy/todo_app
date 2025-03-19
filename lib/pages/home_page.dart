@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/data/task_database.dart';
+import 'package:todo_app/data/task_model.dart';
 import 'package:todo_app/widgets/dialog_box.dart';
 import 'package:todo_app/widgets/todo_tile.dart';
 
@@ -10,27 +12,43 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var taskDatabase = TaskDatabase();
+  List<TaskModel> taskList = [];
+
+  @override
+  void initState() {
+    taskList = taskDatabase.getTasks();
+    super.initState();
+  }
+
   final _controller = TextEditingController();
+  void onCanceled() {
+    _controller.clear();
+    Navigator.pop(context);
+  }
+
+  void onSaved() {
+    setState(() {
+      var newTask = TaskModel(taskName: _controller.text, isCompleted: false);
+      taskList.add(newTask);
+      taskDatabase.addTask(newTask);
+    });
+    _controller.clear();
+    Navigator.pop(context);
+  }
+
   void createNewTask() {
     showDialog(
       context: context,
       builder: (context) {
         return DialogBox(
           controller: _controller,
-          onSave: () {},
-          onCancel: () {},
+          onSave: onSaved,
+          onCancel: onCanceled,
         );
       },
     );
   }
-
-  List tasks = [
-    ["Task 1", false],
-    ["Task 2", true],
-    ["Task 3", false],
-    ["Task 4", true],
-    ["Task 5", false],
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -63,12 +81,23 @@ class _HomePageState extends State<HomePage> {
         child: Icon(Icons.add, color: Colors.white),
       ),
       body: ListView.builder(
-        itemCount: tasks.length,
+        itemCount: taskList.length,
         itemBuilder: (context, index) {
           return TodoTile(
-            taskName: tasks[index][0],
-            isCompleted: tasks[index][1],
-            onChanged: (value) => {},
+            taskName: taskList[index].taskName,
+            isCompleted: taskList[index].isCompleted,
+            onChanged: (value) => {
+              setState(() {
+                taskList[index].isCompleted = value!;
+                taskDatabase.updateTask(index, taskList[index]);
+              })
+            },
+            onDelete: () => {
+              setState(() {
+                taskList.removeAt(index);
+                taskDatabase.deleteTask(index);
+              })
+            },
           );
         },
       ),

@@ -44,7 +44,6 @@ class DialogBox extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop();
                 onCancel();
               },
               child: const Text(
