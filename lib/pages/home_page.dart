@@ -37,6 +37,20 @@ class _HomePageState extends State<HomePage> {
     Navigator.pop(context);
   }
 
+  void updateTask(int index, TaskModel task) {
+    setState(() {
+      taskList[index].isCompleted = !taskList[index].isCompleted;
+      taskDatabase.updateTask(index, taskList[index]);
+    });
+  }
+
+  void deleteTask(int index) {
+    setState(() {
+      taskList.removeAt(index);
+      taskDatabase.deleteTask(index);
+    });
+  }
+
   void createNewTask() {
     showDialog(
       context: context,
@@ -86,17 +100,11 @@ class _HomePageState extends State<HomePage> {
           return TodoTile(
             taskName: taskList[index].taskName,
             isCompleted: taskList[index].isCompleted,
-            onChanged: (value) => {
-              setState(() {
-                taskList[index].isCompleted = value!;
-                taskDatabase.updateTask(index, taskList[index]);
-              })
+            onChanged: (value) {
+              updateTask(index, taskList[index]);
             },
-            onDelete: () => {
-              setState(() {
-                taskList.removeAt(index);
-                taskDatabase.deleteTask(index);
-              })
+            onDelete: () {
+              deleteTask(index);
             },
           );
         },

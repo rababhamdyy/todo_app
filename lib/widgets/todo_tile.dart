@@ -24,7 +24,7 @@ class TodoTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(16),
           child: ListTile(
             leading: Checkbox(
               value: isCompleted,
