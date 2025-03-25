@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class TodoTile extends StatelessWidget {
-  Function(bool?)? onChanged;
+  final Function(bool?)? onChanged;
   final String taskName;
   final bool isCompleted;
   final VoidCallback onDelete;
 
-  TodoTile({
+  const TodoTile({
     super.key,
     required this.taskName,
     required this.isCompleted,
@@ -42,6 +42,7 @@ class TodoTile extends StatelessWidget {
                 color: Colors.black,
                 fontSize: 18,
                 decoration: isCompleted ? TextDecoration.lineThrough : null,
+                decorationColor: Colors.black
               ),
             ),
             trailing: IconButton(

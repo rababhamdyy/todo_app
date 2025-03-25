@@ -72,7 +72,9 @@ class _HomePageState extends State<HomePage> {
         title: Text("ToDo App", style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/settingsPage');
+            },
             icon: Container(
               decoration: BoxDecoration(
                 color: Colors.white.withAlpha(90),
