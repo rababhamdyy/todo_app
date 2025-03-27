@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/utils/dialog_utils.dart';
 
 class TaskTile extends StatelessWidget {
   final Function(bool?)? onChanged;
@@ -46,7 +47,7 @@ class TaskTile extends StatelessWidget {
               ),
             ),
             trailing: IconButton(
-              onPressed: onDelete,
+              onPressed: () => confirmDelete(context, onDelete),
               icon: Icon(Icons.delete, color: Colors.indigo),
             ),
           ),
