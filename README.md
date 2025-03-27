@@ -1,6 +1,6 @@
 # 📝 ToDo App | Flutter Task Manager
 
-<img src="assets/images/app.png" alt="Folder Structure" width="500"/>
+<img src="assets/images/app.png" alt="Folder Structure" width="300"/>
 
 A simple and elegant **ToDo App** built with **Flutter** and **Hive** for local storage.  
 This app supports **dark mode**, **multi-language localization (English & Arabic)**, and **state management using BLoC**.
@@ -45,7 +45,7 @@ This project is well-organized into multiple layers:
 ## 🎬 Screenshots
 
 <p align="center">
-  <b>Light Mode</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Dark Mode</b><br>
+  <b>Light Mode</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Dark Mode</b><br>
   <img src="assets/images/light_mode.png" alt="Light Mode" width="300"/>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="assets/images/dark_mode.png" alt="Dark Mode" width="300"/>
