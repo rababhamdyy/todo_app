@@ -29,6 +29,7 @@ class HomePage extends StatelessWidget {
           controller: _controller,
           onSave: () => onSaved(context),
           onCancel: () => onCanceled(context),
+          dialogLabelText: 'Add a new task',
         );
       },
     );
@@ -72,6 +73,7 @@ class HomePage extends StatelessWidget {
             itemCount: taskList.length,
             itemBuilder: (context, index) {
               return TaskTile(
+                index: index,
                 taskName: taskList[index].taskName,
                 isCompleted: taskList[index].isCompleted,
                 onChanged: (value) {

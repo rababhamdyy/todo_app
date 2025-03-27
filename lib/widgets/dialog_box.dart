@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class DialogBox extends StatelessWidget {
   final TextEditingController controller;
-  VoidCallback onSave;
-  VoidCallback onCancel;
+  final String dialogLabelText;
+  final VoidCallback onSave;
+  final VoidCallback onCancel;
+
   DialogBox({
     super.key,
     required this.controller,
+    required this.dialogLabelText,
     required this.onSave,
     required this.onCancel,
   });
@@ -21,8 +23,8 @@ class DialogBox extends StatelessWidget {
         key: _formKey,
         child: TextFormField(
           controller: controller,
-          decoration: const InputDecoration(
-            labelText: 'Add a new task',
+          decoration: InputDecoration(
+            labelText: dialogLabelText,
             floatingLabelStyle: TextStyle(color: Colors.indigo),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(15)),

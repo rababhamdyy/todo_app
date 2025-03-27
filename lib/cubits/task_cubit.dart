@@ -31,4 +31,15 @@ class TaskCubit extends Cubit<List<TaskModel>> {
     _myBox.deleteAt(index);
     emit([...state]..removeAt(index));
   }
+
+  void updateTaskName(int index, String newTaskName) {
+    if (newTaskName.isNotEmpty) {
+      state[index] = TaskModel(
+        taskName: newTaskName,
+        isCompleted: state[index].isCompleted,
+      );
+      _myBox.putAt(index, state[index]);
+      emit([...state]);
+    }
+  }
 }

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/cubits/task_cubit.dart';
 import 'package:todo_app/utils/dialog_utils.dart';
+import 'package:todo_app/widgets/dialog_box.dart';
 
 class TaskTile extends StatelessWidget {
+  final int index;
   final Function(bool?)? onChanged;
   final String taskName;
   final bool isCompleted;
@@ -9,6 +13,7 @@ class TaskTile extends StatelessWidget {
 
   const TaskTile({
     super.key,
+    required this.index,
     required this.taskName,
     required this.isCompleted,
     required this.onChanged,
@@ -43,13 +48,39 @@ class TaskTile extends StatelessWidget {
                 color: Colors.black,
                 fontSize: 18,
                 decoration: isCompleted ? TextDecoration.lineThrough : null,
-                decorationColor: Colors.black
+                decorationColor: Colors.black,
               ),
             ),
+
             trailing: IconButton(
               onPressed: () => confirmDelete(context, onDelete),
               icon: Icon(Icons.delete, color: Colors.indigo),
             ),
+            onTap: () {
+              TextEditingController editController = TextEditingController(
+                text: taskName,
+              );
+
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return DialogBox(
+                    controller: editController,
+                    onSave: () {
+                      context.read<TaskCubit>().updateTaskName(
+                        index,
+                        editController.text,
+                      );
+                      Navigator.pop(context);
+                    },
+                    onCancel: () {
+                      Navigator.pop(context);
+                    },
+                    dialogLabelText: "Edit task",
+                  );
+                },
+              );
+            },
           ),
         ),
       ),
