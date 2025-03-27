@@ -1,64 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/data/task_database.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/cubits/task_cubit.dart';
 import 'package:todo_app/data/task_model.dart';
 import 'package:todo_app/widgets/dialog_box.dart';
-import 'package:todo_app/widgets/todo_tile.dart';
+import 'package:todo_app/widgets/task_tile.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  var taskDatabase = TaskDatabase();
-  List<TaskModel> taskList = [];
-
-  @override
-  void initState() {
-    taskList = taskDatabase.getTasks();
-    super.initState();
-  }
+class HomePage extends StatelessWidget {
+  HomePage({super.key});
 
   final _controller = TextEditingController();
-  void onCanceled() {
+
+  void onCanceled(BuildContext context) {
     _controller.clear();
     Navigator.pop(context);
   }
 
-  void onSaved() {
-    setState(() {
-      var newTask = TaskModel(taskName: _controller.text, isCompleted: false);
-      taskList.add(newTask);
-      taskDatabase.addTask(newTask);
-    });
+  void onSaved(BuildContext context) {
+    context.read<TaskCubit>().addTask(_controller.text);
     _controller.clear();
     Navigator.pop(context);
   }
 
-  void updateTask(int index, TaskModel task) {
-    setState(() {
-      taskList[index].isCompleted = !taskList[index].isCompleted;
-      taskDatabase.updateTask(index, taskList[index]);
-    });
-  }
-
-  void deleteTask(int index) {
-    setState(() {
-      taskList.removeAt(index);
-      taskDatabase.deleteTask(index);
-    });
-  }
-
-  void createNewTask() {
+  void createNewTask(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
         return DialogBox(
           controller: _controller,
-          onSave: onSaved,
-          onCancel: onCanceled,
+          onSave: () => onSaved(context),
+          onCancel: () => onCanceled(context),
         );
       },
     );
@@ -90,23 +60,27 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          createNewTask();
+          createNewTask(context);
         },
         backgroundColor: Colors.indigo,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Icon(Icons.add, color: Colors.white),
       ),
-      body: ListView.builder(
-        itemCount: taskList.length,
-        itemBuilder: (context, index) {
-          return TodoTile(
-            taskName: taskList[index].taskName,
-            isCompleted: taskList[index].isCompleted,
-            onChanged: (value) {
-              updateTask(index, taskList[index]);
-            },
-            onDelete: () {
-              deleteTask(index);
+      body: BlocBuilder<TaskCubit, List<TaskModel>>(
+        builder: (context, taskList) {
+          return ListView.builder(
+            itemCount: taskList.length,
+            itemBuilder: (context, index) {
+              return TaskTile(
+                taskName: taskList[index].taskName,
+                isCompleted: taskList[index].isCompleted,
+                onChanged: (value) {
+                  context.read<TaskCubit>().updateTask(index);
+                },
+                onDelete: () {
+                  context.read<TaskCubit>().deleteTask(index);
+                },
+              );
             },
           );
         },
