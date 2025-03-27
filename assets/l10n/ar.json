@@ -1,5 +1,15 @@
 {
   "title": "تطبيق المهام",
   "settings": "الإعدادات",
-  "language": "اللغة"
+  "language": "اللغة",
+  "light_mode": "الوضع الفاتح",
+  "dark_mode": "الوضع الداكن",
+  "add_new_task": "إضافة مهمة جديدة",
+  "confirm_deletion": "تأكيد الحذف",
+  "delete_task_confirmation": "هل أنت متأكد أنك تريد حذف هذه المهمة ؟",
+  "cancel": "إلغاء",
+  "delete": "حذف",
+  "save": "حفظ",
+  "edit_task": "تعديل المهمة",
+  "enter_task": "يرجى إدخال مهمة"
 }

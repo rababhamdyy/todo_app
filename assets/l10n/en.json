@@ -1,5 +1,15 @@
 {
   "title": "ToDo App",
   "settings": "Settings",
-  "language": "Language"
+  "language": "Language",
+  "light_mode": "Light Mode",
+  "dark_mode": "Dark Mode",
+  "add_new_task": "Add a new task",
+  "confirm_deletion": "Confirm Deletion",
+  "delete_task_confirmation": "Are you sure you want to delete this task ?",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "save": "Save",
+  "edit_task": "Edit task",
+  "enter_task": "Please enter a task"
 }

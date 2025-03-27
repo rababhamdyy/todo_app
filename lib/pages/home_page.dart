@@ -30,7 +30,9 @@ class HomePage extends StatelessWidget {
           controller: _controller,
           onSave: () => onSaved(context),
           onCancel: () => onCanceled(context),
-          dialogLabelText: 'Add a new task',
+          dialogLabelText: AppLocalizations.of(
+            context,
+          ).translate('add_new_task'),
         );
       },
     );

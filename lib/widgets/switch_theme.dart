@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/cubits/locale_cubit.dart';
+import 'package:todo_app/l10n/app_localizations.dart';
 import 'package:todo_app/themes/themes_provider.dart';
 
 class SwitchWidget extends StatelessWidget {
@@ -16,7 +17,10 @@ class SwitchWidget extends StatelessWidget {
         // Theme Switcher
         _buildSwitchTile(
           context,
-          title: themeProvider.isDarkMode ? 'Light Mode' : 'Dark Mode',
+          title:
+              themeProvider.isDarkMode
+                  ? AppLocalizations.of(context).translate('light_mode')
+                  : AppLocalizations.of(context).translate('dark_mode'),
           value: themeProvider.isDarkMode,
           onChanged: (value) => themeProvider.toggleTheme(),
         ),

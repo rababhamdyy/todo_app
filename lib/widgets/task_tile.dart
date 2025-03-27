@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/cubits/task_cubit.dart';
+import 'package:todo_app/l10n/app_localizations.dart';
 import 'package:todo_app/utils/dialog_utils.dart';
 import 'package:todo_app/widgets/dialog_box.dart';
 
@@ -76,7 +77,9 @@ class TaskTile extends StatelessWidget {
                     onCancel: () {
                       Navigator.pop(context);
                     },
-                    dialogLabelText: "Edit task",
+                    dialogLabelText: AppLocalizations.of(
+                      context,
+                    ).translate('edit_task'),
                   );
                 },
               );

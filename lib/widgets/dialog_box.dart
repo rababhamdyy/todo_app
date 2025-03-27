@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/l10n/app_localizations.dart';
 
 class DialogBox extends StatelessWidget {
   final TextEditingController controller;
@@ -33,7 +34,7 @@ class DialogBox extends StatelessWidget {
           ),
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'Please enter a task';
+              return AppLocalizations.of(context).translate('enter_task');
             }
             return null;
           },
@@ -48,8 +49,8 @@ class DialogBox extends StatelessWidget {
               onPressed: () {
                 onCancel();
               },
-              child: const Text(
-                'Cancel',
+              child: Text(
+                AppLocalizations.of(context).translate('cancel'),
                 style: TextStyle(color: Colors.indigo),
               ),
             ),
@@ -59,7 +60,10 @@ class DialogBox extends StatelessWidget {
                   onSave();
                 }
               },
-              child: const Text('Save', style: TextStyle(color: Colors.indigo)),
+              child: Text(
+                AppLocalizations.of(context).translate('save'),
+                style: TextStyle(color: Colors.indigo),
+              ),
             ),
           ],
         ),
