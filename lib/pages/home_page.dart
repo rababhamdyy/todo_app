@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/cubits/task_cubit.dart';
 import 'package:todo_app/data/task_model.dart';
+import 'package:todo_app/l10n/app_localizations.dart';
 import 'package:todo_app/widgets/dialog_box.dart';
 import 'package:todo_app/widgets/task_tile.dart';
 
@@ -40,7 +41,10 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.indigo,
-        title: Text("ToDo App", style: TextStyle(color: Colors.white)),
+        title: Text(
+          AppLocalizations.of(context).translate('title'),
+          style: TextStyle(color: Colors.white),
+        ),
         actions: [
           IconButton(
             onPressed: () {

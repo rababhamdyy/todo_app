@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/l10n/app_localizations.dart';
 import 'package:todo_app/widgets/switch_theme.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -8,11 +9,11 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(AppLocalizations.of(context).translate('settings')),
         foregroundColor: Colors.white,
         backgroundColor: Colors.indigo,
       ),
-      body: SwitchWidget(),
+      body: const SwitchWidget(),
     );
   }
 }
